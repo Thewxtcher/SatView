@@ -458,6 +458,13 @@ nav#main-nav { /* Specificity for main nav */
     transform: translateY(0);
 }
 
+/* NEW: Force immediate visibility for the home section */
+.content-section.force-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+
 .section-header {
     text-align: center;
     margin-bottom: 60px;
