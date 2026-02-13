@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const archiveMainWrapper = document.getElementById('archive-main-wrapper'); // Wrapper for original content + new sections
     const navLinks = document.querySelector('.nav-links');
     const hamburgerMenu = document.querySelector('.hamburger-menu');
-    const beatsContainer = document.getElementById('beats-container'); // Renamed from c2ModulesContainer
+    const beatsContainer = document.getElementById('beats-container'); // Container for dynamically loaded beat cards
     
-    // **CORRECTED MODAL REFERENCES**
+    // **CRITICALLY CORRECTED MODAL REFERENCES**
     const cartModal = document.getElementById('cart-modal'); 
     const cartItemsContainer = document.getElementById('cart-items'); 
     const cartTotalSpan = document.getElementById('cart-total'); 
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const accessGrantedScreen = document.getElementById('access-granted-screen');
     const ambientAudio = document.getElementById('ambient-audio');
-    const reinitC2Button = document.getElementById('reinit-c2-button'); // NEW: Manual C2 trigger
+    const reinitC2Button = document.getElementById('reinit-c2-button'); // Manual C2 trigger button in Logs section
 
     let cart = []; // Renamed from operationQueue
     let currentPlayingBeat = null; // For audio playback simulation
@@ -355,6 +355,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 checkScrollFade(); // Trigger scroll animations
                 // Ensure the homepage is the default view, and scroll to it
                 document.getElementById('home-section').scrollIntoView({ behavior: 'smooth' });
+                // Set the 'Home' nav link as active
+                navLinks.querySelectorAll('a').forEach(l => l.classList.remove('active'));
+                document.querySelector('nav .nav-links a[href="#home-section"]').classList.add('active');
             }
         }, { once: true });
     });
@@ -393,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
         beatsContainer.innerHTML = '';
         BEATS_DATA.forEach(beat => {
             const beatCard = document.createElement('div');
-            beatCard.classList.add('beat-card');
+            beatCard.classList.add('beat-card', 'hdr-glow'); // Added hdr-glow here
             beatCard.innerHTML = `
                 <div class="beat-info">
                     <h3 class="beat-title">${beat.title}</h3>
@@ -510,6 +513,8 @@ document.addEventListener('DOMContentLoaded', () => {
         cartModal.classList.remove('active');
         document.body.style.overflow = '';
         console.log("Cart modal hidden.");
+        // **CRITICAL FIX**: After hiding cart, scroll to beats section
+        document.getElementById('beats-section').scrollIntoView({ behavior: 'smooth' });
     }
 
     continueBrowsingButton.addEventListener('click', hideCartModal);
