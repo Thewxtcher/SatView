@@ -107,7 +107,7 @@
                         <li>Limited Distribution</li>
                         <li><span class="red-text">$29.99</span></li>
                     </ul>
-                    <button class="button add-to-cart-btn">SECURE</button> <!-- Added .button class -->
+                    <button class="button add-to-cart-btn" data-beat-id="license-standard" data-beat-name="Standard Acquisition" data-beat-price="29.99">SECURE</button> <!-- Added .button class -->
                 </div>
                 <div class="license-card container hdr-glow"> <!-- Added hdr-glow and container class -->
                     <h3>PREMIUM ACQUISITION</h3>
@@ -118,7 +118,7 @@
                         <li>Performance Rights</li>
                         <li><span class="red-text">$79.99</span></li>
                     </ul>
-                    <button class="button add-to-cart-btn">SECURE</button> <!-- Added .button class -->
+                    <button class="button add-to-cart-btn" data-beat-id="license-premium" data-beat-name="Premium Acquisition" data-beat-price="79.99">SECURE</button> <!-- Added .button class -->
                 </div>
                 <div class="license-card container hdr-glow"> <!-- Added hdr-glow and container class -->
                     <h3>EXCLUSIVE DOMINION</h3>
@@ -129,7 +129,7 @@
                         <li>Broadcast & Sync Rights</li>
                         <li><span class="red-text">$499.99+</span></li>
                     </ul>
-                    <button class="button add-to-cart-btn">ACQUIRE</button> <!-- Added .button class -->
+                    <button class="button add-to-cart-btn" data-beat-id="license-exclusive" data-beat-name="Exclusive Dominion" data-beat-price="499.99">ACQUIRE</button> <!-- Added .button class -->
                 </div>
             </div>
         </section>
@@ -190,16 +190,16 @@
         </footer>
     </div> <!-- End of #archive-main-wrapper -->
 
-    <!-- Cart Modal -->
+    <!-- **CORRECTED** Cart Modal (formerly operation-queue-modal) -->
     <div id="cart-modal" class="modal">
         <div class="modal-content hdr-glow"> <!-- Added hdr-glow class -->
             <h2>ACQUISITION LOG</h2>
             <div id="cart-items">
                 <!-- Cart items will be dynamically loaded here by JavaScript -->
             </div>
-            <p>Total Acquisitions: <span id="cart-total" class="red-text">$0.00</span></p>
-            <button id="checkout-button" class="button checkout-btn">INITIATE DOWNLOAD</button> <!-- Added .button class -->
-            <button id="continue-browsing" class="button gray-button">CONTINUE BROWSING</button> <!-- Added .button class -->
+            <p>Total Acquisitions: <span id="cart-total" class="red-text">$0.00</span></p> <!-- Corrected initial text -->
+            <button id="checkout-button" class="button checkout-btn">INITIATE DOWNLOAD</button> <!-- Corrected text -->
+            <button id="continue-browsing" class="button gray-button">CONTINUE BROWSING</button> <!-- Corrected text -->
         </div>
     </div>
 
