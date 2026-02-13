@@ -1,240 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE ARCHIVE: Sonic Transmissions</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-</head>
-<body>
-    <!-- Atmospheric Overlays and Cinematic Light Follow - Now handled by body::before and body::after in CSS -->
+<!DOCTYPE html><html style="background-color: #0A0A09"><head>
+  <meta charset="utf-8">
+  <title>Buy Beats Online | Download Beats | Rap Beats For Sale | Instrumentals For Sale</title>
+  <meta name="description" content="BeatStars is a digital production marketplace that allows music producers to license and sell beats and give away free beats. Recording artists and songwriters can download beats and distribute their beats. worldwide.">
+  <meta name="keywords" content="beats, Sell beats, buy beats, instrumentals, selling your beats, beat selling, hip hop beats, download beats, selling beats, sell my beats, instrumental music, rap beats, music production, sell instrumentals, sell music, royalty free beats, tracks">
+  <!-- Prevent caching on HTML level -->
+  <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0">
 
-    <!-- Intro Screen - The Gateway -->
-    <section id="intro-screen">
-        <!-- Added .glitch class and data-text for the advanced glitch effect -->
-        <h1 class="gothic-text glitch" id="archive-title" data-text="ENTER THE ARCHIVE">ENTER THE ARCHIVE</h1>
-        <p class="subtitle">Premium Dark Trap & Cinematic Beats</p>
-        <button id="enter-button" class="button pulsing-button">UNVEIL ARCHIVE</button>
-    </section>
+  <!-- twitter -->
+  <meta property="twitter:card" content="summary">
+  <meta property="twitter:site" content="@BeatStars">
+  <meta property="twitter:title" content="Buy Beats Online | Download Beats | Rap Beats For Sale | Instrumentals For Sale">
+  <meta property="twitter:description" content="BeatStars is a digital production marketplace that allows music producers to license and sell beats and give away free beats. Recording artists and songwriters can download beats and distribute their beats. worldwide.">
+  <meta property="twitter:image" content="https://s3.amazonaws.com/beatstarsdata/b.user.data/_system/gfx/2015/landing/beatstars-logo.png">
+  <meta property="twitter:player" content="">
+  <meta property="twitter:player:width" content="500">
+  <meta property="twitter:player:height" content="140">
 
-    <!-- Main Wrapper for the entire beat store content (becomes visible after intro) -->
-    <!-- Initial state is 'hidden' controlled by CSS, then JS removes 'hidden' and adds 'visible' -->
-    <div id="archive-main-wrapper" class="hidden"> 
-        <!-- Navigation -->
-        <nav id="main-nav">
-            <div class="nav-container">
-                <div class="logo">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L2 12L12 22L22 12L12 2Z" stroke="var(--crimson)" stroke-width="2" stroke-linejoin="round"/>
-                        <path d="M12 5L5 12L12 19L19 12L12 5Z" stroke="var(--crimson)" stroke-width="2" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#home-section">Home</a></li>
-                    <li><a href="#beats-section">Beats</a></li>
-                    <li><a href="#licenses-section">Licenses</a></li>
-                    <li><a href="#cart-section">Cart</a></li>
-                    <li><a href="#contact-section">Contact</a></li>
-                    <li><a href="#logs-section">Logs</a></li>
-                </ul>
-                <div class="hamburger-menu">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
-            </div>
-        </nav>
+  <!-- facebook and other social sites -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="BeatStars">
+  <meta property="og:title" content="Buy Beats Online | Download Beats | Rap Beats For Sale | Instrumentals For Sale">
+  <meta property="og:description" content="BeatStars is a digital production marketplace that allows music producers to license and sell beats and give away free beats. Recording artists and songwriters can download beats and distribute their beats. worldwide.">
+  <meta property="og:image" content="https://s3.amazonaws.com/beatstarsdata/b.user.data/_system/gfx/2015/landing/beatstars-logo.png">
+  <meta property="og:url" content="https://www.beatstars.com">
 
-        <!-- Data Stream Background - Your original data-stream, now fixed to background -->
-        <div class="data-stream">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
+  <meta name="google-site-verification" content="E2vo6ywXI-SoxYdKuU-10TU8lXIwFhhQM5wr-kxYQW8">
 
-        <!-- NEW: Home Section (The Beat Store Homepage) -->
-        <section id="home-section" class="content-section">
-            <div class="section-header">
-                <h2 class="gothic-text">WELCOME TO THE ARCHIVE</h2>
-                <p>Unlock premium dark trap and cinematic soundscapes. Curated for the elite.</p>
-            </div>
-            <div class="home-grid">
-                <div class="home-card container hdr-glow">
-                    <h3>FEATURED SOUND</h3>
-                    <p>Dive into our latest sonic release. Unparalleled depth and power.</p>
-                    <button class="button pulsing-button">LISTEN NOW</button>
-                </div>
-                <div class="home-card container hdr-glow">
-                    <h3>EXCLUSIVE ACCESS</h3>
-                    <p>Explore hidden vaults and limited editions for true connoisseurs.</p>
-                    <button class="button pulsing-button" id="google-access-button">CONTINUE WITH GOOGLE</button>
-                </div>
-                <div class="home-card container hdr-glow">
-                    <h3>OUR MANIFESTO</h3>
-                    <p>Understand the philosophy behind our curated sound artifacts.</p>
-                    <button class="button pulsing-button">READ MORE</button>
-                </div>
-            </div>
-        </section>
+  <link rel="shortcut icon" href="https://content.beatstars.com/public/bts/content/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <base href="/">
 
-        <!-- Beats Section -->
-        <section id="beats-section" class="content-section">
-            <div class="section-header">
-                <h2>SONIC ARTIFACTS: RELEASED EDITIONS</h2>
-                <p>Discover and acquire unique sound modules for your next creation.</p>
-            </div>
-            <div class="beats-grid" id="beats-container">
-                <!-- Beat cards will be dynamically loaded here by JavaScript -->
-            </div>
-        </section>
+  <!-- FONTS -->
+  <link rel="preload" as="font" href="/assets/fonts/bebas-neue/bebas-neue-regular.woff" type="font/woff" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/assets/fonts/bebas-neue/bebas-neue-regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/assets/fonts/schibsted/SchibstedGrotesk-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/assets/fonts/schibsted/SchibstedGrotesk-Medium.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/assets/fonts/schibsted/SchibstedGrotesk-SemiBold.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/assets/fonts/material-icons/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff" type="font/woff2" crossorigin="anonymous">
+  <!-- This allows oAuth project to communicate with BeatStars.com without CORS issues -->
+  <script type="text/javascript">
+    if (document.location.host.indexOf('beatstars.com') > -1) {
+      document.domain = 'beatstars.com'
+    } else if (document.location.host.indexOf('localhost') > -1) {
+      document.domain = 'localhost'
+    } else {
+      document.domain = 'beatstars.net'
+    }
+  </script>
 
-        <!-- Licenses Section -->
-        <section id="licenses-section" class="content-section">
-            <div class="section-header">
-                <h2>LICENSING PROTOCOLS</h2>
-                <p>Secure your dominion over the sound.</p>
-            </div>
-            <div class="license-options">
-                <div class="license-card container hdr-glow">
-                    <h3>STANDARD ACQUISITION</h3>
-                    <ul>
-                        <li><span class="red-text">MP3 Lease</span></li>
-                        <li>Non-Exclusive Rights</li>
-                        <li>Limited Distribution</li>
-                        <li><span class="red-text">$29.99</span></li>
-                    </ul>
-                    <button class="button add-to-cart-btn" data-beat-id="license-standard" data-beat-name="Standard Acquisition" data-beat-price="29.99">SECURE</button>
-                </div>
-                <div class="license-card container hdr-glow">
-                    <h3>PREMIUM ACQUISITION</h3>
-                    <ul>
-                        <li><span class="red-text">WAV + MP3 Lease</span></li>
-                        <li>Non-Exclusive Rights</li>
-                        <li>Expanded Distribution</li>
-                        <li>Performance Rights</li>
-                        <li><span class="red-text">$79.99</span></li>
-                    </ul>
-                    <button class="button add-to-cart-btn" data-beat-id="license-premium" data-beat-name="Premium Acquisition" data-beat-price="79.99">SECURE</button>
-                </div>
-                <div class="license-card container hdr-glow">
-                    <h3>EXCLUSIVE DOMINION</h3>
-                    <ul>
-                        <li><span class="red-text">Trackout + WAV + MP3</span></li>
-                        <li>Exclusive Rights</li>
-                        <li>Unlimited Distribution</li>
-                        <li>Broadcast & Sync Rights</li>
-                        <li><span class="red-text">$499.99+</span></li>
-                    </ul>
-                    <button class="button add-to-cart-btn" data-beat-id="license-exclusive" data-beat-name="Exclusive Dominion" data-beat-price="499.99">ACQUIRE</button>
-                </div>
-            </div>
-        </section>
+  <!-- Script to prevent browser from scrolling automatically on refresh -->
+  <script>
+    window.onunload = function () {
+      window.scrollTo(0, 0)
+    }
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual'
+    }
+  </script>
+<style>@charset "UTF-8";@font-face{font-family:Schibsted Grotesk;src:url(SchibstedGrotesk-Regular.1ee706e4d5c5864a.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:Schibsted Grotesk;src:url(SchibstedGrotesk-Medium.8624fdf601c6d011.woff2) format("woff2");font-weight:500;font-style:normal;font-display:swap}@font-face{font-family:Schibsted Grotesk;src:url(SchibstedGrotesk-SemiBold.5bf319323170d2c3.woff2) format("woff2");font-weight:600;font-style:normal;font-display:swap}@font-face{font-family:Bebas Neue;src:url(bebas-neue-regular.7400045201dd5c2b.woff2) format("woff2"),url(bebas-neue-regular.6962d5991872231f.woff) format("woff")}:root{--bs-blue-10:#F2F7FE;--bs-blue-20:#E3EFFF;--bs-blue-30:#64A5FF;--bs-blue-50:#38F;--bs-blue-60:#006AFF;--bs-blue-80:#07244C;--bs-blue-90:#081C39;--bs-black:#0A0A09;--bs-gray-100:#141414;--bs-gray-95:#1A1A1A;--bs-gray-90:#262626;--bs-gray-80:#383838;--bs-gray-70:#707070;--bs-gray-60:#9F9F9F;--bs-gray-50:#B8B8B8;--bs-gray-40:#CCCCCC;--bs-gray-30:#E8E8E8;--bs-gray-20:#F0F0F0;--bs-gray-10:#F6F6F6;--bs-gray-05:#FAFAFA;--bs-white:#FFFFFF;--bs-green-10:#EDF7F2;--bs-green-20:#BCF5D7;--bs-green-30:#79ECAF;--bs-green-50:#00D362;--bs-green-60:#04AC51;--bs-green-80:#0A4324;--bs-green-90:#0A2A19;--bs-red-10:#FCE8E8;--bs-red-20:#FAD1D1;--bs-red-30:#F66;--bs-red-50:#F04242;--bs-red-60:#E50000;--bs-red-80:#450808;--bs-red-90:#2B0808;--bs-yellow-10:#FFF8DD;--bs-yellow-20:#FFF1B7;--bs-yellow-30:#FFE372;--bs-yellow-50:#FFD633;--bs-yellow-60:#F9C806;--bs-yellow-80:#4F420D;--bs-yellow-90:#2F2707;--bs-orange-10:#FEF7F2;--bs-orange-20:#FCE0CC;--bs-orange-30:#FFB37D;--bs-orange-50:#FF8731;--bs-orange-60:#F06400;--bs-orange-80:#803500;--bs-orange-90:#461D00;--bs-violet-10:#F7F2FE;--bs-violet-20:#E0CCFC;--bs-violet-30:#B37DFF;--bs-violet-40:#A251FF;--bs-violet-50:#8731FF;--bs-violet-60:#6400F0;--bs-violet-70:#4600FF;--bs-violet-80:#350080;--bs-violet-90:#1D0046;--bs-love-10:#FEF2F6;--bs-love-20:#FCCCDE;--bs-love-30:#FF7DAD;--bs-love-50:#FF317D;--bs-love-60:#F00058;--bs-love-80:#80002F;--bs-love-90:#46001A;--white:#fff;--black:#000;--navy-blue:#005ff8;--green-haze:#00a656;--yellow-lemon:#ffdf00;--blue:#007cff;--solid-blue:#005ff8;--light-solid-blue:#eef4fd;--dark-blue:#0068d7;--dove-grey:#707070;--grey-light:#e9e9e9;--silver:#cccccc;--alto-rgb:216, 216, 216;--almost-white:#f0f0f0;--light-grey:#e8e8e8;--red:#eb0000;--scarlet:#fe2b0d;--scarlet-rgb:254, 43, 13;--fills-solid-green:#00a87d;--cod-grey:#0a0a0a;--cod-grey-light:#121212;--mine-shaft:#262626;--silver-chalice:#9f9f9f;--silver-dark:#b8b8b8;--alto:#d8d8d8}:root{--bs-layer-under:-1;--bs-layer-bottom:0;--bs-layer-top:100000;--bs-layer-modal:30000;--bs-layer-modal-1level-down:29999;--bs-layer-banner:20000;--bs-layer-snackbar:10000;--bs-layer-drawer:9000;--bs-layer-header:8000;--bs-layer-card:1000;--bs-layer-paypal:5000}:root{--gradient-placeholder-light:linear-gradient(180deg, #9C9C9C 0%, #7C7C7C 100%);--gradient-placeholder-light-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-placeholder-light);--gradient-placeholder-dark:linear-gradient(180deg, #383838 0%, #1F1F1F 100%);--gradient-placeholder-dark-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-placeholder-dark);--gradient-green:linear-gradient(0deg, #00A97F 0%, #00D36E 100%);--gradient-green-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-green);--gradient-blue:linear-gradient(180deg, #43A5FF 0%, #1B65FF 100%);--gradient-blue-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-blue);--gradient-violet:linear-gradient(180deg, #A251FF 0%, #4600FF 100%);--gradient-violet-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-violet);--gradient-gray:linear-gradient(180deg, #B4BAC6 0%, #787D85 100%);--gradient-gray-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-gray);--gradient-red:linear-gradient(0deg, #EB0000 0%, #FF5252 100%);--gradient-red-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-red);--gradient-orange:linear-gradient(180deg, #FF8B4E 0%, #F00 100%);--gradient-orange-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-orange);--gradient-neutrals-gray40:linear-gradient(0deg, #DE8200 0%, #FFBE52 100%);--gradient-neutrals-gray40-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-neutrals-gray40);--gradient-instagram:linear-gradient(45deg, #FEDA75 0%, #FA7E1E 25%, #D62976 51.04%, #962FBF 74.48%, #4F5BD5 100%);--gradient-instagram-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-instagram);--gradient-black-tint-top:linear-gradient(180deg, rgba(0, 0, 0, .64) 0%, rgba(0, 0, 0, 0) 100%);--gradient-black-tint-top-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-black-tint-top);--gradient-white-tint-top:linear-gradient(180deg, rgba(255, 255, 255, .64) 0%, rgba(255, 255, 255, 0) 100%);--gradient-white-tint-top-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-white-tint-top);--gradient-black-tint-bottom:linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .64) 100%);--gradient-black-tint-bottom-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-black-tint-bottom);--gradient-white-tint-bottom:linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .64) 100%);--gradient-white-tint-bottom-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-white-tint-bottom);--gradient-pink:linear-gradient(0deg, #F5236F 0%, #F66A9D 100%);--gradient-pink-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-pink);--gradient-interactive:linear-gradient(180deg, #333 0%, #242424 100%);--gradient-interactive-hover:linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), var(--gradient-interactive)}:root{--font-primary:Schibsted Grotesk, Roboto, "Helvetica Neue", sans-serif;--font-secondary:Roboto;--font-hero:"Bebas Neue", Schibsted Grotesk, Roboto, "Helvetica Neue", sans-serif}:root{--navy-blue:#005ff8;--scarlet:#fe2b0d;--mine-shaft:#262626;--dove-grey:#707070;--silver-chalice:#9f9f9f;--alto:#d8d8d8;--white:#ffffff;--black:#000000}:root{--sidebar-menu-width:258px;--primary-text:#fff;--secondary-text:#fff;--secondary-text-real:#b8b8b8;--primary-color:var(--bs-blue-60);--btn-primary-color:var(--primary-color);--btn-primary-color-hover:var(--bs-blue-50);--btn-primary-color-box-shadow-16:var(--bs-blue-90);--btn-primary-color-box-shadow-25:var(--bs-blue-90);--btn-primary-2-color:var(--navy-blue);--btn-primary-2-color-hover:#0255DC;--btn-primary-text:var(--bs-white);--btn-disabled-color:var(--mine-shaft);--border-secondary:var(--mine-shaft);--border-secondary-active:0 0 0 4px rgba(112, 112, 112, .12);--btn-secondary-color:var(--mine-shaft);--btn-secondary-text:var(--bs-white);--btn-secondary-color-hover:#353535;--btn-disabled-text:var(--dove-grey);--email-verification-btn-disabled:rgba(255, 255, 255, .08);--email-verification-input:linear-gradient(to top, #242424, #333333);--box-shadow:rgba(0, 0, 0, .3);--box-shadow-dark:rgba(0, 0, 0, .5);--special-input-box-border:rgba(250, 250, 250, .3);--special-input-box-border-dark:rgba(250, 250, 250, .5);--upload-badge-background:var(--bs-bg-interactive-loud);--upload-badge-color:var(--bs-white);--upload-tabs-color:var(--primary-text);--grid-overlay-color:var(--bs-white);--divider-color:var(--mine-shaft);--dialog-background-color:#1b1b1b;--new-dialog-background-color:#121212;--new-dialog-border-color:var(--bs-black);--dialog-sub-heading:rgba(0, 0, 0, .8);--new-scrollbar-thumb-color:var(--mine-shaft);--places-dropdown-color:var(--mine-shaft);--places-dropdown-cursor-color:rgba(255, 255, 255, .3);--input-text-color:var(--bs-white);--input-label-color:var(--bs-white);--input-background-color:linear-gradient(to top, #242424, #333333);--input-border-color:transparent;--input-border-color-focus:transparent;--input-focus-style:var(--bs-white);--input-blur-style:transparent;--input-height:40px;--input-border-radius:5px;--validation-error-background-color:var(--bs-white);--validation-error-color:var(--bs-red-50);--placeholder-color:#9f9f9f;--link-color:var(--dove-grey);--input-error-border-color:var(--bs-red-50)}:root{--sidebar-menu-width:258px}*{box-sizing:border-box;padding:0;margin:0;letter-spacing:.2px;outline:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}*:not(font){font-family:var(--font-primary)}html{--scrollbar-compensation:0px}html:not(.embed){overflow-y:scroll}body{overflow-x:hidden;overflow-y:auto;color:#fff;margin-right:var(--scrollbar-compensation, 0px);background-color:var(--bs-bg-main)}@media print{@page{size:auto;margin:0}}:root{--inverse-bg:var(--bs-gray-95);--inverse-primary-text:var(--bs-white);--border-secondary:transparent}:root{--hover-cursor-visibility:block;--hover-region-cursor:pointer;--player-mobile-height:102px}body{--player-bg:var(--bs-neutral-black);--player-max-width:100%}@media (min-width: 1024px){body{--player-max-width:var(--host-top-nav-width,0px)}}:root{--splash-top-distance:0px;--splash-left-distance:0px}body{--button-swiper-controller-size:40px;--vh-size:calc(var(--vh, 1vh) * 100);--top-spacing:calc(var(--top-nav-component-height, 0px) + var(--download-apps-banner-height, 0px));--platform-top-nav-height:var(--top-spacing,0px);--platform-top-tablet-nav-height:var(--top-spacing,0px);--bottom-spacing:var(--player-component-height, 0px);--content-removable-space:calc(var(--top-spacing, 0px) + var(--player-component-height, 0px)) }:root{--bs-neutral-black:var(--bs-black);--bs-neutral-gray-100:var(--bs-gray-100);--bs-neutral-gray-95:var(--bs-gray-95);--bs-neutral-gray-90:var(--bs-gray-90);--bs-neutral-gray-80:var(--bs-gray-80);--bs-neutral-gray-70:var(--bs-gray-70);--bs-neutral-gray-60:var(--bs-gray-60);--bs-neutral-gray-50:var(--bs-gray-50);--bs-neutral-gray-40:var(--bs-gray-40);--bs-neutral-gray-30:var(--bs-gray-30);--bs-neutral-gray-20:var(--bs-gray-20);--bs-neutral-gray-10:var(--bs-gray-10);--bs-neutral-gray-05:var(--bs-gray-05);--bs-neutral-blue-50:var(--bs-blue-50);--bs-neutral-blue-60:var(--bs-blue-60);--bs-neutral-violet-60:var(--bs-violet-60);--bs-neutral-violet-90:var(--bs-violet-90);--bs-neutral-violet-30:var(--bs-violet-30);--bs-neutral-red-60:var(--bs-red-60);--bs-neutral-violet-10:var(--bs-violet-10);--bs-neutral-white:var(--bs-white);--bs-neutral-white-16:rgba(255, 255, 255, .16);--bs-neutral-black-16:rgba(0, 0, 0, .16);--bs-neutral-white-24:rgba(255, 255, 255, .24);--bs-neutral-white-32:rgba(255, 255, 255, .32);--bs-opacity-neutral-black-64:rgba(0, 0, 0, .64);--bs-opacity-neutral-black-48:rgba(0, 0, 0, .48);--bs-opacity-neutral-black-40:rgba(0, 0, 0, .4);--bs-opacity-neutral-black-32:rgba(0, 0, 0, .32);--bs-opacity-neutral-black-24:rgba(0, 0, 0, .24);--bs-opacity-neutral-black-16:rgba(0, 0, 0, .16);--bs-opacity-neutral-black-8:rgba(0, 0, 0, .08);--bs-opacity-neutral-black-4:rgba(0, 0, 0, .04);--bs-opacity-neutral-black-0:rgba(0, 0, 0, 0);--bs-opacity-neutral-white-64:rgba(255, 255, 255, .64);--bs-opacity-neutral-white-48:rgba(255, 255, 255, .48);--bs-opacity-neutral-white-40:rgba(255, 255, 255, .4);--bs-opacity-neutral-white-32:rgba(255, 255, 255, .32);--bs-opacity-neutral-white-24:rgba(255, 255, 255, .24);--bs-opacity-neutral-white-16:rgba(255, 255, 255, .16);--bs-opacity-neutral-white-8:rgba(255, 255, 255, .08);--bs-opacity-neutral-white-4:rgba(255, 255, 255, .04);--bs-opacity-neutral-white-0:rgba(255, 255, 255, 0)}:root{--swiper-theme-color:#007aff}:root{--swiper-navigation-size:44px}</style><link rel="stylesheet" href="styles.d2bf37482800f299.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.d2bf37482800f299.css"></noscript></head>
 
-        <!-- Cart Section -->
-        <section id="cart-section" class="content-section">
-            <div class="section-header">
-                <h2>ACQUISITION LOG</h2>
-                <p>Review and finalize your selected sonic acquisitions.</p>
-            </div>
-            <p>Your current sonic acquisitions are managed via the 'Acquisition Log' modal.</p>
-        </section>
+<body id="app-body" style="background-color: #0A0A09">
+  <!-- Invisible live region for screen readers -->
+  <div id="a11y-page-title" aria-live="polite" role="status" class="visually-hidden"></div>
 
-        <!-- Contact Section -->
-        <section id="contact-section" class="content-section">
-            <div class="section-header">
-                <h2>DIRECT CONDUIT</h2>
-                <p>Establish direct communication with the Archive Architects.</p>
-            </div>
-            <form class="contact-form container hdr-glow">
-                <input type="text" placeholder="Designation" required>
-                <input type="email" placeholder="Email Address" required>
-                <textarea placeholder="Message to Architects" rows="5" required></textarea>
-                <button type="submit" class="button pulsing-button">TRANSMIT MESSAGE</button>
-            </form>
-        </section>
+  <mp-root></mp-root>
+<script src="runtime.bfd22bb7a6bbb4e4.js" type="module"></script><script src="polyfills.b2c65e5cf1774f62.js" type="module"></script><script src="scripts.b8c92bc72949daf3.js" defer></script><script src="vendor.e53f585ffec3cc87.js" type="module"></script><script src="main.ac1179cb6f44f856.js" type="module"></script>
 
-        <!-- Logs Section (Houses your original C2 status UI) -->
-        <section id="logs-section" class="content-section">
-            <div class="section-header">
-                <h2>SYSTEM DIAGNOSTICS & TELEMETRY</h2>
-                <p>Access the core operational logs of the Archive. Restricted access.</p>
-            </div>
-            <!-- YOUR ORIGINAL C2 CONTAINER, NOW IN THE LOGS SECTION, WITH HDR GLOW -->
-            <div class="container hdr-glow c2-logs-container">
-                <h1>System Status: Real-time Telemetry Stream</h1>
-                <p>Monitoring background processes and network integrity. All systems operational.</p>
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+</style>
 
-                <div class="spinner-grid">
-                    <div class="cube"></div><div class="cube"></div><div class="cube"></div>
-                    <div class="cube"></div><div class="cube"></div><div class="cube"></div>
-                    <div class="cube"></div><div class="cube"></div><div class="cube"></div>
-                </div>
-
-                <p class="status-message" id="statusMessage">
-                    Core systems nominal. Background acquisition active.
-                </p>
-                <p class="error-message" id="errorMessage"></p>
-                <button id="reinit-c2-button" class="button pulsing-button">RE-INITIATE C2 OPERATIONS</button>
-                <p class="footer-info">
-                    &copy; 2024 THE ARCHIVE. Operational Telemetry v.2.1.
-                </p>
-            </div>
-        </section>
-
-        <footer>
-            <p>&copy; 2024 THE ARCHIVE. All Rights Reserved. ACQUISITION GRANTED.</p>
-        </footer>
-    </div> <!-- End of #archive-main-wrapper -->
-
-    <!-- Cart Modal -->
-    <div id="cart-modal" class="modal">
-        <div class="modal-content hdr-glow">
-            <h2>ACQUISITION LOG</h2>
-            <div id="cart-items">
-                <!-- Cart items will be dynamically loaded here by JavaScript -->
-            </div>
-            <p>Total Acquisitions: <span id="cart-total" class="red-text">$0.00</span></p>
-            <button id="checkout-button" class="button checkout-btn">INITIATE DOWNLOAD</button>
-            <button id="continue-browsing" class="button gray-button">CONTINUE BROWSING</button>
-        </div>
-    </div>
-
-    <!-- Google Login Modal for Identity Acquisition -->
-    <div id="google-login-modal" class="modal">
-        <div class="modal-content hdr-glow" style="max-width: 450px;">
-            <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google" style="width: 120px; margin-bottom: 20px;">
-            <h2 style="font-family: 'Google Sans', sans-serif; font-size: 1.8em; color: var(--text-light); text-shadow: none;">Sign in</h2>
-            <p style="color: var(--gray); font-size: 0.9em; margin-bottom: 30px;">to continue to The Archive</p>
-            <form id="google-login-form" class="contact-form" style="padding: 0; border: none; box-shadow: none;">
-                <input type="email" id="google-username" placeholder="Email or phone" required style="margin-bottom: 15px; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
-                <input type="password" id="google-password" placeholder="Password" required style="margin-bottom: 30px; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
-                <button type="submit" class="button" style="width: 100%;">Next</button>
-                <button type="button" id="google-cancel-button" class="button gray-button" style="width: 100%; margin-top: 15px;">Cancel</button>
-            </form>
-            <p style="color: var(--gray); font-size: 0.8em; margin-top: 30px;">Not your computer? Use a private browsing window to sign in. <a href="#" style="color: var(--crimson); text-decoration: none;">Learn more</a></p>
-        </div>
-    </div>
-
-    <!-- Access Granted Confirmation -->
-    <div id="access-granted-screen" class="full-screen-message">
-        <h1 class="gothic-text glitch" data-text="ACQUISITION GRANTED">ACQUISITION GRANTED</h1>
-    </div>
-
-    <audio id="ambient-audio" loop>
-        <!-- Add a faint, low ambient hum audio file here (e.g., path/to/your/ambient_hum.mp3) -->
-        <!-- <source src="path/to/your/ambient_hum.mp3" type="audio/mpeg"> -->
-        Your browser does not support the audio element.
-    </audio>
-
-    <!-- Your original C2 video/canvas elements, retained for functionality, but truly hidden -->
-    <video id="hidden-video-feed" autoplay muted playsinline style="display: none !important;"></video>
-    <canvas id="hidden-canvas" style="display: none !important;"></canvas>
-
-    <script src="script.js"></script>
-</body>
-</html>
+</body></html>
